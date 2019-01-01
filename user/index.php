@@ -24,8 +24,7 @@
 
       </ul>
       <form class="form-inline my-2 my-lg-0">
-              <a class="nav-link" href="#">Login <span class="sr-only"></span></a>
-              <a class="nav-link" href="#">Signup <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/">Log Out <span class="sr-only"></span></a>
       </form>
       </div>
   </nav>
@@ -36,9 +35,12 @@
       <div class="col-md-6">
         <form>
           <div class="form-group">
-              <input class="form-control" id="add-ingredient">
-              <button type="submit" id="submit" class="btn btn-primary mb-2">Add Ingredient</button>
-            </div>
+          <input class="form-control" list="add-ingredient" id="ingredient">
+            <datalist id="add-ingredient">
+            </datalist> 
+            <br>
+            <button type="submit" id="submit" class="btn btn-primary mb-2">Add Ingredient</button>
+          </div>
           <div class="form-group">
             <label for="ingredients-list">List of Ingredients</label>
             <textarea class="form-control" id="ingredients-list" rows="20"></textarea>
