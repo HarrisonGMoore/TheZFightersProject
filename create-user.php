@@ -30,9 +30,8 @@
        $last_name = $conn->real_escape_string($_POST['last_name']);
        $email = $conn->real_escape_string($_POST['email']);
        $password = $conn->real_escape_string($_POST['password']);
-       $is_admin = 0;
-       $stid=$conn->prepare("CALL add_user(?,?,?,?,?)");
-       $stid->bind_param('ssiss', $email, $password, $is_admin, $first_name, $last_name) or die($stid->error);
+       $stid=$conn->prepare("CALL add_user(?,?,?,?)");
+       $stid->bind_param('ssss', $email, $password, $first_name, $last_name) or die($stid->error);
        $stid->execute();
        if ($stid->error){
          echo "Error";
