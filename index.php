@@ -79,6 +79,10 @@
           $fields = $perm->get_result();
           $user_id = -1;
 
+          while ($row = $fields->fetch_assoc()) {
+            $user_id = $row["user_id"];
+          }
+
           $_SESSION["USER_ID"] = $user_id;
 
           //Redirect to the correct page

@@ -10,7 +10,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">RecipieBuilder.com</a>
+        <a class="navbar-brand" href="#">RecipeBuilder.com</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                    <a class="nav-link" href="#">Build Recipe <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Your Recipies</a>
+                    <a class="nav-link" href="my-recipes.php">Your Recipies</a>
                 </li>
 
             </ul>
@@ -73,16 +73,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="rows">
-                                    <tr>
-                                        <td>salt</td>
-                                        <td>4 cups</td>
-                                        <td>40 per cup</td>
-                                    </tr>
-                                    <tr>
-                                        <td>peanut</td>
-                                        <td>1</td>
-                                        <td>2 per ounce</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
