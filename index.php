@@ -73,28 +73,16 @@
           session_start();
           $_SESSION["email"] = $_POST['email'];
           $email = $conn->real_escape_string($_POST['email']);
-          $perm=$conn->prepare("SELECT user_id, email, is_admin from `APP_USERS` where email = UPPER(?)");
+          $perm=$conn->prepare("SELECT user_id, email from `APP_USERS` where email = UPPER(?)");
           $perm->bind_param('s', $email);
           $perm->execute() or die($perm->error);
           $fields = $perm->get_result();
-          $is_admin = 0;
           $user_id = -1;
-          // Check if user is an admin
-          while ($row = $fields->fetch_assoc()) {
-              $is_admin = $row["is_admin"];
-              $user_id = $row["user_id"];
-          }
 
-          $_SESSION["IS_ADMIN"] = $is_admin;
           $_SESSION["USER_ID"] = $user_id;
 
-          //Redirect to the correct page depending on user permissions
-          if ($is_admin === 1){
-           header('Location: /admin/index.php');
-          }
-          else {
-            header('Location: /user/index.php');
-          }
+          //Redirect to the correct page
+          header('Location: /user/index.php');
 
         }
         else {
