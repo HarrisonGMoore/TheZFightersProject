@@ -24,9 +24,12 @@ $("#submit-ingredient").on("click", function (event) {
   event.preventDefault();
   console.log("hi");
   var ingredient = $("#ingredient").val().trim();
+  var url_ingredient = ingredient;
   var amount = $("#amount").val().trim();
-
-  var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572";
+  if (ingredient.includes("%")) {
+    url_ingredient = ingredient.replace(/%/g, "%25");
+  }
+  var url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572";
 
   $.ajax({
     url: url,
