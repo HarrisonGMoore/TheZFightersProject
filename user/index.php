@@ -53,7 +53,12 @@
         </form>
         <form method="post" action="">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
+                    <label for="recipe-name">Recipe Name:</label>
+                    <input class="form-control" id="recipe-name">
+                    <br>
+                </div>
+                <div class="col-md-7">
                     <div class="card form-group">
                         <div class="card-header" id="card-header">
                             Ingredients List

@@ -45,21 +45,13 @@ $("#submit-ingredient").on("click", function (event) {
 $("#submit-recipe").on("click", function () {
   console.log("hi");
   var data = getTableData();
-  alert(data[1]);
-  for (var i = 1; i < data.length - 1; i++) {
-    var str = data[i].toString();
-    var array = str.split(",");
-    var ingredient = array[0];
-    var amount = array[1];
-    var calories = array[2];
-    console.log(ingredient + "   " + amount + "   " + calories);
-    $.post("submit.php", { ingredient: ingredient, amount: amount, calories: calories },
-    function(data) {
-      $('#results').append(data);
-    });
-  }
+  var recipe_name = $("#recipe-name").val().trim();
+  $.post("submit.php", { data: data, recipe_name: recipe_name },
+  // function(data) {
+  //   $('#results').append(data);
+  // }
+  );
 });
-
 
 function getTableData() {
   var data = [];

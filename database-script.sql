@@ -1,7 +1,14 @@
+SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------------------------------------------------------
--- Table tailoredrecipes.APP_USERS
+-- Schema recipebuilder
 -- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tailoredrecipes`.`APP_USERS` (
+CREATE SCHEMA IF NOT EXISTS `recipebuilder` ;
+
+
+-- ----------------------------------------------------------------------------
+-- Table recipebuilder.APP_USERS
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recipebuilder`.`APP_USERS` (
   `USER_ID` INT(11) NOT NULL AUTO_INCREMENT,
   `EMAIL` VARCHAR(30) CHARACTER SET 'utf8' NOT NULL,
   `PASSWORD` VARCHAR(40) CHARACTER SET 'utf8' NOT NULL,
@@ -16,11 +23,12 @@ COLLATE = utf8_bin;
 
 
 -- ----------------------------------------------------------------------------
--- Table tailoredrecipes.INGREDIENT
+-- Table recipebuilder.INGREDIENT
 -- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tailoredrecipes`.`INGREDIENT` (
+CREATE TABLE IF NOT EXISTS `recipebuilder`.`INGREDIENT` (
   `INGREDIENT_ID` INT(11) NOT NULL AUTO_INCREMENT,
-  `NAME` VARCHAR(70) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `INGREDIENT_NAME` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
+  `CALORIES` VARCHAR(70) CHARACTER SET 'utf8' NOT NULL,
   PRIMARY KEY (`INGREDIENT_ID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 12
@@ -29,12 +37,78 @@ COLLATE = utf8_bin;
 
 
 -- ----------------------------------------------------------------------------
--- Routine tailoredrecipes.add_user
+-- Table recipebuilder.RECIPE
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recipebuilder`.`RECIPE` (
+  `RECIPE_ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `RECIPE_NAME` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
+  `USER_ID` INT(11) NOT NULL,
+  PRIMARY KEY (`RECIPE_ID`),
+  INDEX `recipe_user_id_fk_idx` (`USER_ID` ASC),
+  CONSTRAINT `recipe_user_id_fk`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `recipebuilder`.`APP_USERS` (`USER_ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;
+
+
+-- ----------------------------------------------------------------------------
+-- Table recipebuilder.INGREDIENTS
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `recipebuilder`.`INGREDIENTS` (
+  `INGREDIENTS_ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `INGREDIENT_ID` INT(11) NOT NULL,
+  `RECIPE_ID` INT(11) NOT NULL,
+  `AMOUNT` VARCHAR(30) CHARACTER SET 'utf8' NOT NULL,
+  PRIMARY KEY (`INGREDIENTS_ID`),
+  INDEX `ingredients_ingredient_id_fk_idx` (`INGREDIENTS_ID` ASC),
+  INDEX `ingredients_recipe_id_fk_idx` (`RECIPE_ID` ASC),
+  CONSTRAINT `ingredients_ingredient_id_fk`
+    FOREIGN KEY (`INGREDIENT_ID`)
+    REFERENCES `recipebuilder`.`INGREDIENT` (`INGREDIENT_ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ingredients_recipe_id_fk`
+    FOREIGN KEY (`RECIPE_ID`)
+    REFERENCES `recipebuilder`.`RECIPE` (`RECIPE_ID`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;
+
+
+-- ----------------------------------------------------------------------------
+-- View recipebuilder.RECIPE_INFO
+-- ----------------------------------------------------------------------------
+USE `recipebuilder`;
+CREATE  OR REPLACE VIEW `recipebuilder`.`RECIPE_INFO` 
+AS select distinct `r`.`RECIPE_ID` AS `RECIPE_ID`,
+`r`.`RECIPE_NAME` AS `RECIPE_NAME`,
+`u`.`USER_ID` AS `USER_ID`,
+`u`.`EMAIL` AS `EMAIL`,
+`is`.`INGREDIENTS_ID` AS `INGREDIENTS_ID`,
+`is`.`AMOUNT` AS `AMOUNT`,
+`i`.`INGREDIENT_ID` AS `INGREDIENT_ID`,
+`i`.`INGREDIENT_NAME` AS `INGREDIENT_NAME`,
+`i`.`CALORIES` AS `CALORIES`
+from (((`recipebuilder`.`RECIPE` `r` left join `recipebuilder`.`APP_USERS` `u` on(`r`.`USER_ID` = `u`.`USER_ID`))
+left join `recipebuilder`.`INGREDIENTS` `is` on(`r`.`RECIPE_ID` = `is`.`RECIPE_ID`))
+left join `recipebuilder`.`INGREDIENT` `i` on(`is`.`INGREDIENT_ID` = `i`.`INGREDIENT_ID`));
+
+
+-- ----------------------------------------------------------------------------
+-- Routine recipebuilder.add_user
 -- ----------------------------------------------------------------------------
 DELIMITER $$
 
 DELIMITER $$
-USE `tailoredrecipes`$$
+USE `recipebuilder`$$
 CREATE PROCEDURE `add_user`(IN p_email   VARCHAR(4000),
                       IN p_password   VARCHAR(4000),
                       p_first_name VARCHAR(4000),
@@ -57,12 +131,12 @@ END$$
 DELIMITER ;
 
 -- ----------------------------------------------------------------------------
--- Routine tailoredrecipes.change_password
+-- Routine recipebuilder.change_password
 -- ----------------------------------------------------------------------------
 DELIMITER $$
 
 DELIMITER $$
-USE `tailoredrecipes`$$
+USE `recipebuilder`$$
 CREATE PROCEDURE `change_password`(IN p_email VARCHAR(4000),
                              IN p_old_password   VARCHAR(4000),
                              IN p_new_password   VARCHAR(4000))
@@ -90,12 +164,12 @@ BEGIN
 DELIMITER ;
 
 -- ----------------------------------------------------------------------------
--- Routine tailoredrecipes.get_hash
+-- Routine recipebuilder.get_hash
 -- ----------------------------------------------------------------------------
 DELIMITER $$
 
 DELIMITER $$
-USE `tailoredrecipes`$$
+USE `recipebuilder`$$
 CREATE FUNCTION `get_hash`(p_email VARCHAR(4000), p_password VARCHAR(4000)) RETURNS varchar(4000) CHARSET latin1
     DETERMINISTIC
 BEGIN
@@ -106,12 +180,12 @@ END$$
 DELIMITER ;
 
 -- ----------------------------------------------------------------------------
--- Routine tailoredrecipes.valid_user
+-- Routine recipebuilder.valid_user
 -- ----------------------------------------------------------------------------
 DELIMITER $$
 
 DELIMITER $$
-USE `tailoredrecipes`$$
+USE `recipebuilder`$$
 CREATE FUNCTION `valid_user`(p_email VARCHAR(4000), p_password VARCHAR(4000)) RETURNS varchar(1) CHARSET latin1
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN
@@ -141,3 +215,6 @@ BEGIN
  END$$
 DELIMITER ;
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+CALL add_user('mateo0568@gmail.com', 'puggles1', 'Matthew', 'Lesniewicz');
