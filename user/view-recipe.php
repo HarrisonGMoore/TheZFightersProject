@@ -8,6 +8,7 @@
     <?php include('../connect.php'); ?>
     <?php  $user_id = $_SESSION["USER_ID"]; ?>
     <?php  $recipe_id = $_GET["id"]; ?>
+    <?php $exporthref = "export-recipe.php?id1=" . $recipe_id . ""; ?>
 </head>
 
 <body>
@@ -71,6 +72,9 @@
         <form method="post" action="">
             <button name="Delete" type="submit" class="btn btn-primary">Delete Recipe</button>
         </form>
+        <form method="post" action="">
+            <div onclick="generateCSV()" class="btn btn-success">Export Recipe</div>
+        </form>
 
         <?php
             if (isset($_POST['Delete'])){
@@ -86,6 +90,11 @@
             }
         ?>
     </div>
-</body>
 
+    <script type="text/javascript">
+        function generateCSV() {
+            window.location.href = '<?php echo $exporthref ?>';
+        }
+    </script>
+</body>
 </html>

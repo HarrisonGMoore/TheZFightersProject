@@ -81,8 +81,7 @@
                 </div>
             </div>
         </form>
-        <div id="results">
-            <!-- All data will display here  -->
+        <div id="similar">
         </div>
         <div class="container fixed-bottom">
             <footer class="page-footer font-small">
