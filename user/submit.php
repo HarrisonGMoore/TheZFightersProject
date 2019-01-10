@@ -2,6 +2,7 @@
   include('validate.php');
   include('../connect.php');
   $recipe_name = $conn->real_escape_string($_POST['recipe_name']);
+  $total_calories = intval($_POST['total_calories']);
   $data = $_POST['data'];
   print_r($data);
 
@@ -31,8 +32,8 @@
 
     $result = $conn->query("SELECT RECIPE_ID FROM RECIPE WHERE RECIPE_NAME = '$recipe_name'");
     if ($result->num_rows == 0 && $recipe_name !== "") {
-      $sql_recipe = "INSERT INTO RECIPE (RECIPE_NAME, USER_ID)
-      VALUES ('$recipe_name', '$user_id')";
+      $sql_recipe = "INSERT INTO RECIPE (RECIPE_NAME, TOTAL_CALORIES , USER_ID)
+      VALUES ('$recipe_name', '$total_calories' ,'$user_id')";
 
       if ($conn->query($sql_recipe) === TRUE) {
         $recipe_id = mysqli_insert_id($conn);
