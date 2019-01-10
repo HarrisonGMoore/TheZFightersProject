@@ -11,7 +11,7 @@ $("#ingredient").on("change keyup", function () {
     dropdown.append('<option selected="true" disabled>Choose Ingredient</option>');
     dropdown.prop('selectedIndex', 0);
 
-    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572&search_type=grocery&offset=0&limit=10";
+    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37&search_type=grocery&offset=0&limit=10";
 
     req = $.getJSON(url, function (data) {
       console.log(data.exact);
@@ -37,7 +37,7 @@ $("#submit-ingredient").on("click", function (event) {
   if (ingredient.includes("%")) {
     url_ingredient = ingredient.replace(/%/g, "%25");
   }
-  var ingredient_url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572";
+  var ingredient_url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37";
 
   $.ajax({
     url: ingredient_url,
