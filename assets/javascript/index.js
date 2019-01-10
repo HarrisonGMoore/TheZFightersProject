@@ -1,7 +1,11 @@
+var req = null;
+var total_calories = 0;
 $("#ingredient").on("change keyup", function () {
   var ingredient = $("#ingredient").val().trim();
   if (ingredient.length > 2) {
     let dropdown = $('#add-ingredient');
+    
+    if (req != null) req.abort();
     dropdown.empty();
 
     dropdown.append('<option selected="true" disabled>Choose Ingredient</option>');
@@ -9,8 +13,9 @@ $("#ingredient").on("change keyup", function () {
 
     var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572&search_type=grocery&offset=0&limit=10";
 
-    $.getJSON(url, function (data) {
+    req = $.getJSON(url, function (data) {
       console.log(data.exact);
+      $("#amountLabel").html("Amount of: " + data.results[0].serving_uom);
       $.each(data.results, function (key, entry) {
         dropdown.append($('<option></option>').attr('value', entry.item_name).text("brand: " + entry.brand_name).attr('data-index-number', key));
         console.log(key);
@@ -25,7 +30,6 @@ $("#submit-ingredient").on("click", function (event) {
   console.log("hi");
   var ingredient = $("#ingredient").val().trim();
   var url_ingredient = ingredient;
-  var amount = $("#amount").val().trim();
   if (ingredient.includes("%")) {
     url_ingredient = ingredient.replace(/%/g, "%25");
   }
@@ -35,8 +39,10 @@ $("#submit-ingredient").on("click", function (event) {
     url: ingredient_url,
     method: "GET"
   }).then(function (response) {
-    var calories = response.results[0].nutrient_value + " per " + response.results[0].serving_uom;
-    console.log(ingredient);
+    var amount = $("#amount").val().trim() + " " + response.results[0].serving_uom;
+    var calories = response.results[0].nutrient_value * $("#amount").val().trim();
+    total_calories = total_calories + parseInt(calories);
+    console.log(total_calories);
     if (ingredient !== "" && amount !== "") {
       $("#rows").append("<tr><td>" + ingredient + "</td><td>" + amount + "</td><td>" + calories + "</td><tr>");
     }
@@ -65,7 +71,8 @@ $("#submit-recipe").on("click", function () {
   var data = getTableData();
   var recipe_name = $("#recipe-name").val().trim();
   console.log(data);
-  $.post("submit.php", { data: data, recipe_name: recipe_name },
+  console.log(parseInt(total_calories));
+  $.post("submit.php", { data: data, recipe_name: recipe_name, total_calories: total_calories },
     // function(data) {
     //   $('#results').append(data);
     // }
