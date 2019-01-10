@@ -38,6 +38,7 @@
             <thead>
                 <tr>
                     <th>Recipe Name</th>
+                    <th>Total Calories</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@
                     $result = $conn->query($query);
                     while($row = $result->fetch_array()){
                         print '<tr>';
-                        print '<td>' . $row["RECIPE_NAME"] . '</td><td><a href="view-recipe.php?id=' . $row["RECIPE_ID"] . '">View</a></td>';
+                        print '<td>' . $row["RECIPE_NAME"] . '</td><td>' . $row["TOTAL_CALORIES"] . '</td><td><a href="view-recipe.php?id=' . $row["RECIPE_ID"] . '">View</a></td>';
                         print '</tr>';
                     }
                 ?>

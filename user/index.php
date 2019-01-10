@@ -37,11 +37,11 @@
         <form method="post" class="form-row">
             <div class="col-md-4">
                 <label for="ingredient">Ingredient:</label>
-                <input class="form-control" list="add-ingredient" id="ingredient" autocomplete="off">
+                <input type="text" class="form-control" list="add-ingredient" id="ingredient" autocomplete="off">
             </div>
             <div class="col-md-2">
-                <label for="amount">Amount:</label>
-                <input class="form-control" id="amount" autocomplete="off">
+                <label id="amountLabel" for="amount">Amount:</label>
+                <input type="number" class="form-control" id="amount" autocomplete="off">
             </div>
             <div class="col-md-1">
                 <label for="submit-ingredient">&nbsp;</label>
