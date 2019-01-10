@@ -15,7 +15,11 @@ $("#ingredient").on("change keyup", function () {
 
     req = $.getJSON(url, function (data) {
       console.log(data.exact);
-      $("#amountLabel").html("Amount of: " + data.results[0].serving_uom);
+      var unit = data.results[0].serving_uom;
+      if (unit[unit.length - 1] !== "s") {
+        unit += "s";
+      }
+      $("#amountLabel").html("Amount of " + unit + ": ");
       $.each(data.results, function (key, entry) {
         dropdown.append($('<option></option>').attr('value', entry.item_name).text("brand: " + entry.brand_name).attr('data-index-number', key));
         console.log(key);
@@ -39,7 +43,14 @@ $("#submit-ingredient").on("click", function (event) {
     url: ingredient_url,
     method: "GET"
   }).then(function (response) {
-    var amount = $("#amount").val().trim() + " " + response.results[0].serving_uom;
+    var unit = response.results[0].serving_uom;
+    if (unit[unit.length - 1] !== "s" && $("#amount").val().trim() > 1) {
+      unit += "s";
+    }
+    else if (unit[unit.length - 1] === "s" && $("#amount").val().trim() == 1) {
+      unit = unit.substring(0, unit.length - 1);
+    }
+    var amount = $("#amount").val().trim() + " " + unit;
     var calories = response.results[0].nutrient_value * $("#amount").val().trim();
     total_calories = total_calories + parseInt(calories);
     console.log(total_calories);
