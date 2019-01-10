@@ -13,9 +13,9 @@
     echo $ingredient . " " . $amount . " " . $calories . " ";
 
     $result = $conn->query("SELECT INGREDIENT_ID FROM INGREDIENT WHERE INGREDIENT_NAME = '$ingredient'");
-    if ($result->num_rows == 0 && $ingredient !== "" && $calories !== "") {
-      $sql_ingredient = "INSERT INTO INGREDIENT (INGREDIENT_NAME, CALORIES)
-      VALUES ('$ingredient', '$calories')";
+    if ($result->num_rows == 0 && $ingredient !== "") {
+      $sql_ingredient = "INSERT INTO INGREDIENT (INGREDIENT_NAME)
+      VALUES ('$ingredient')";
 
       if ($conn->query($sql_ingredient) === TRUE) {
       } else {
@@ -48,8 +48,8 @@
     $row = $result->fetch_array();
     $ingredient_id = $row['INGREDIENT_ID'];
     
-    $sql_ingredients = "INSERT INTO INGREDIENTS (INGREDIENT_ID, RECIPE_ID, AMOUNT)
-    VALUES ('$ingredient_id', '$recipe_id', '$amount')";
+    $sql_ingredients = "INSERT INTO INGREDIENTS (INGREDIENT_ID, RECIPE_ID, CALORIES, AMOUNT)
+    VALUES ('$ingredient_id', '$recipe_id', '$calories', '$amount')";
 
     if ($conn->query($sql_ingredients) === TRUE) {
     } else {
