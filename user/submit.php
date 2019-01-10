@@ -28,7 +28,7 @@
     $user_id = intval($row['USER_ID']);
     echo $user_id;
 
-    $result = $conn->query("SELECT RECIPE_ID FROM RECIPE WHERE RECIPE_NAME = '$recipe_name'");
+    $result = $conn->query("SELECT RECIPE_ID FROM RECIPE WHERE RECIPE_NAME = '$recipe_name' AND USER_ID = '$user_id'");
     if ($result->num_rows == 0 && $recipe_name !== "") {
       $stid=$conn->prepare("INSERT INTO RECIPE (recipe_name, total_calories, user_id) VALUES (?,?,?)");
       $stid->bind_param('sii', $recipe_name, $total_calories, $user_id) or die($stid->error);
