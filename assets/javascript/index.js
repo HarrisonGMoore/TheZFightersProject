@@ -1,5 +1,3 @@
-var ingredient_string = "";
-
 $("#ingredient").on("keyup", function () {
   var ingredient = $("#ingredient").val().trim();
   if (ingredient.length > 2) {
@@ -9,12 +7,12 @@ $("#ingredient").on("keyup", function () {
     dropdown.append('<option selected="true" disabled>Choose Ingredient</option>');
     dropdown.prop('selectedIndex', 0);
 
-    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572";
+    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572&limit=10";
 
     $.getJSON(url, function (data) {
       console.log(data.exact);
       $.each(data.results, function (key, entry) {
-        if (key > 8) return false;
+        //if (key > 8) return false;
         dropdown.append($('<option></option>').attr('value', entry.item_name).text("brand: " + entry.brand_name).attr('data-index-number', key));
         console.log(key);
       })
@@ -22,6 +20,7 @@ $("#ingredient").on("keyup", function () {
   }
 });
 
+var ingredient_string = "";
 $("#submit-ingredient").on("click", function (event) {
   event.preventDefault();
   console.log("hi");
@@ -49,7 +48,7 @@ $("#submit-ingredient").on("click", function (event) {
     ingredient_string = ingredient;
   }
   else {
-    ingredient_string = ingredient_string + "&q=" + ingredient;
+    ingredient_string = ingredient_string + "," + ingredient;
   }
   var recipe_url = "https://api.edamam.com/search?q=" + ingredient_string + "&app_id=5452f6ef&app_key=28579f5271bcb880b21ca0931120f5d3";
   console.log(recipe_url);
@@ -58,7 +57,7 @@ $("#submit-ingredient").on("click", function (event) {
     url: recipe_url,
     method: "GET"
   }).then(function (response) {
-    popSimilar(response);
+    appendSimilar(response);
   });
 });
 
@@ -88,13 +87,12 @@ function getTableData() {
   return data;
 }
 
-function popSimilar(response) {
+function appendSimilar(response) {
   $("#similar").html("");
   for (var i = 0; i < 5; i++) {
     var recipe = response.hits[i].recipe.label;
     var image_url = response.hits[i].recipe.image;
     var url = response.hits[i].recipe.url;
-    var ingredients = response.hits[i].recipe.ingredientLines;
     console.log(url);
     $("#similar").append(
       "<div class='card' style='width: 18rem;'>" +
@@ -104,8 +102,5 @@ function popSimilar(response) {
       "</div>" +
       "</div>"
     );
-    // for (var i = 0; i < response.hits.length(); i++) {
-
-    // }
   }
 }
