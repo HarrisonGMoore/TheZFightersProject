@@ -1,0 +1,36 @@
+html {
+height: 100%;
+}
+
+body {
+height: 100% !important;
+background-image: url(cutting-board.jpg);
+}
+
+#overall-page {
+height: 100%;
+}
+
+#logo {
+size: 100px;
+}
+
+#header-footer {
+background-color: #d1ffc1;
+}
+
+#similar-recipe-column {
+height: 100%;
+}
+
+#ingredient-form {
+width: 600px;
+}
+
+#login-box{
+background-color: white; 
+margin: auto;
+margin-top: 20px;
+width: 50%;
+padding: 10px;
+}
