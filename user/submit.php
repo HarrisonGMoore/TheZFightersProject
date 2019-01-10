@@ -14,13 +14,11 @@
 
     $result = $conn->query("SELECT INGREDIENT_ID FROM INGREDIENT WHERE INGREDIENT_NAME = '$ingredient'");
     if ($result->num_rows == 0 && $ingredient !== "") {
-      $sql_ingredient = "INSERT INTO INGREDIENT (INGREDIENT_NAME)
-      VALUES ('$ingredient')";
-
-      if ($conn->query($sql_ingredient) === TRUE) {
-      } else {
-        echo "Error: " . $sql_ingredient . "<br>" . $conn->error;
-      }
+      $stid=$conn->prepare("INSERT INTO INGREDIENT (ingredient_name) VALUES (?)");
+      $stid->bind_param('s', $ingredient) or die($stid->error);
+      $stid->execute();
+      $ingredient_id = mysqli_insert_id($conn);
+      $stid->close();
     }
 
     $email = $_SESSION['email'];
@@ -32,14 +30,11 @@
 
     $result = $conn->query("SELECT RECIPE_ID FROM RECIPE WHERE RECIPE_NAME = '$recipe_name'");
     if ($result->num_rows == 0 && $recipe_name !== "") {
-      $sql_recipe = "INSERT INTO RECIPE (RECIPE_NAME, TOTAL_CALORIES , USER_ID)
-      VALUES ('$recipe_name', '$total_calories' ,'$user_id')";
-
-      if ($conn->query($sql_recipe) === TRUE) {
-        $recipe_id = mysqli_insert_id($conn);
-      } else {
-        echo "Error: " . $sql_recipe . "<br>" . $conn->error;
-      }
+      $stid=$conn->prepare("INSERT INTO RECIPE (recipe_name, total_calories, user_id) VALUES (?,?,?)");
+      $stid->bind_param('sii', $recipe_name, $total_calories, $user_id) or die($stid->error);
+      $stid->execute();
+      $recipe_id = mysqli_insert_id($conn);
+      $stid->close();
     }
 
   
@@ -48,12 +43,9 @@
     $row = $result->fetch_array();
     $ingredient_id = $row['INGREDIENT_ID'];
     
-    $sql_ingredients = "INSERT INTO INGREDIENTS (INGREDIENT_ID, RECIPE_ID, CALORIES, AMOUNT)
-    VALUES ('$ingredient_id', '$recipe_id', '$calories', '$amount')";
-
-    if ($conn->query($sql_ingredients) === TRUE) {
-    } else {
-      echo "Error: " . $sql_ingredients . "<br>" . $conn->error;
-    }
+    $stid=$conn->prepare("INSERT INTO INGREDIENTS (ingredient_id, recipe_id, calories, amount) VALUES (?,?,?,?)");
+    $stid->bind_param('iiis', $ingredient_id, $recipe_id, $calories, $amount) or die($stid->error);
+    $stid->execute();
+    $stid->close();
   }
 ?>
