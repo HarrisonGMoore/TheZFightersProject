@@ -1,4 +1,4 @@
-$("#ingredient").on("keyup", function () {
+$("#ingredient").on("change keyup", function () {
   var ingredient = $("#ingredient").val().trim();
   if (ingredient.length > 2) {
     let dropdown = $('#add-ingredient');
@@ -7,12 +7,11 @@ $("#ingredient").on("keyup", function () {
     dropdown.append('<option selected="true" disabled>Choose Ingredient</option>');
     dropdown.prop('selectedIndex', 0);
 
-    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572&limit=10";
+    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=5046f269&appKey=b98cd96564773ae253d3510e0f580572&search_type=grocery&offset=0&limit=10";
 
     $.getJSON(url, function (data) {
       console.log(data.exact);
       $.each(data.results, function (key, entry) {
-        //if (key > 8) return false;
         dropdown.append($('<option></option>').attr('value', entry.item_name).text("brand: " + entry.brand_name).attr('data-index-number', key));
         console.log(key);
       })
