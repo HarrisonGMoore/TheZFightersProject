@@ -45,8 +45,7 @@
             </div>
             <div class="col-md-1">
                 <label for="submit-ingredient">&nbsp;</label>
-                <button name="submit-ingredient" type="submit" id="submit-ingredient" class="btn btn-primary mb-2">Add
-                    Ingredient</button>
+                <button name="submit-ingredient" type="submit" id="submit-ingredient" class="btn btn-primary mb-2">Add Ingredient</button>
             </div>
             <datalist id="add-ingredient">
             </datalist>
@@ -77,7 +76,7 @@
                             </table>
                         </div>
                     </div>
-                    <button name="submit-recipe" id="submit-recipe" type="button" class="btn btn-primary">Save Recipe</button>
+                    <button name="submit-recipe" id="submit-recipe" type="submit" class="btn btn-primary">Save Recipe</button>
                 </div>
             </div>
         </form>
