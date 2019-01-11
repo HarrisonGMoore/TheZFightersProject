@@ -1,46 +1,58 @@
+<!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Recipe Builder: New User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <script src="main.js"></script>
+    <?php include('validate.php'); ?>
+    <?php include('..connect.php'); ?>
 </head>
 <body>
-  <?php include 'connect.php'; ?>
-<!-- HTML for form for user info -->
-<div class="container">
-  <form class="form-horizontal" method="post" action="" id="form1">
-     <fieldset>
-       <ul>
-               <div class="col-xs-offset-2 col-xs-10"><p><b>Please enter your information:</b></p></div>
-               <div class="form-group row"><label for="name" class="col-2 col-form-label">First Name:</label><div class="col-10"><input type="text" name="first_name" placeholder="first name" class="form-control" role="input" aria-required="true" required/></div></div>
-               <div class="form-group row"><label for="name" class="col-2 col-form-label">Last Name:</label><div class="col-10"><input type="text" name="last_name" placeholder="last name" class="form-control" role="input" aria-required="true" required/></div></div>
-               <div class="form-group row"><label for="name" class="col-2 col-form-label">Email:</label><div class="col-10"><input type="text" name="email" placeholder="email" class="form-control" role="input" aria-required="true" required/></div></div>
-               <div class="form-group row"><label for="name" class="col-2 col-form-label">Password:</label><div class="col-10"><input type="password" name="password" placeholder="password" class="form-control" role="input" aria-required="true" required/></div></div>
-               <div class="form-group row"><div class="col-2 col-form-label"><button name="Submit" type="submit" class="btn btn-primary">Submit</button></div></div>
-       </ul>
-       <br/>
-     </fieldset>
-   </form>
+<?php include 'connect.php'; ?>
 
+<div class="container-fluid" id="header-footer">
+        <nav class="navbar navbar-expand-lg">
+            <img class="mr-3" src="assets/css/recipe-builder-logo.png" alt="Recipe Builder" id="logo">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="nav-link" href="index.php">Already a member? Login Here<span class="sr-only"></span></a>
+            </form>
+            </div>
+        </nav>
+    </div>
 
-   <?php
-   //if the form is submitted then call add user function to create user
-     if (isset($_POST['Submit'])) {
-       $first_name = $conn->real_escape_string($_POST['first_name']);
-       $last_name = $conn->real_escape_string($_POST['last_name']);
-       $email = $conn->real_escape_string($_POST['email']);
-       $password = $conn->real_escape_string($_POST['password']);
-       $stid=$conn->prepare("CALL add_user(?,?,?,?)");
-       $stid->bind_param('ssss', $email, $password, $first_name, $last_name) or die($stid->error);
-       $stid->execute();
-       if ($stid->error){
-         echo "Error";
-       }
-       else{
-         header('Location: index.php');
-       }
-   }
-   ?>
- </div>
+    <!-- MAIN PAGE CONTENT GOES INBETWEEN HERE -->
+    <div id="login-box">
+        <form>
+        First Name:
+        <input type="email" class="form-control" name="first name" id="first name" placeholder="John">
+        Last Name:
+        <input type="email" class="form-control" name="last name" id="last name" placeholder="Smith">
+        Email:
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="jsmith@johnsmith.com">
+        Password:
+        <input type="email" class="form-control" name="password" id="password" placeholder="Make it secure">
+        <br>
+        <button name= "Submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <!-- MAIN PAGE CONTENT ENDS HERE -->
+
+    <div class="container-fluid fixed-bottom" id="header-footer">
+        <footer class="page-footer font-small">
+            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">TheZFighters</a>
+            </div>
+        </footer>
+    </div>
+</div>
 </body>
 </html>
