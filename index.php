@@ -29,8 +29,8 @@
     </div>
 
     <!-- MAIN PAGE CONTENT GOES INBETWEEN HERE -->
-    <div id="login-box">
-        <form method="post">
+    <div>
+        <form method="post" id="login-box">
         Email:
         <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="jsmith@johnsmith.com">
         Password:
