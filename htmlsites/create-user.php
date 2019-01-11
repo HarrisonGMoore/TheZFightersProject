@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Recipe Basic Layout</title>
+    <title>Recipe Builder: New User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-    <!-- <script src="main.js"></script> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <script src="main.js"></script>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="container">
+    <div class="container-fluid" id="header-footer">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">RecipieBuilder.com</a>
+            <img class="mr-3" src="assets/css/recipe-builder-logo.png" alt="Recipe Builder" id="logo">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,38 +22,41 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                <a class="nav-link" href="#">Create a New Recipe<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Your Recipies</a>
+                <a class="nav-link" href="#">My Recipes</a>
                 </li>
-                
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link" href="#">Login <span class="sr-only"></span></a>
-                    <a class="nav-link" href="#">Signup <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Login<span class="sr-only"></span></a>
+                <a class="nav-link" href="#">Signup<span class="sr-only">(current)</span></a>
             </form>
             </div>
         </nav>
     </div>
 
     <!-- MAIN PAGE CONTENT GOES INBETWEEN HERE -->
-    <div class="container">
-        <div class="row">
-            <div class="col-8">
-                
-            </div>
-            <div class="col-4">
-                
-            </div>
-        </div>
+    <div id="login-box">
+        <form>
+        First Name:
+        <input type="email" class="form-control" name="first name" id="first name" placeholder="John">
+        Last Name:
+        <input type="email" class="form-control" name="last name" id="last name" placeholder="Smith">
+        Email:
+        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="jsmith@johnsmith.com">
+        Password:
+        <input type="email" class="form-control" name="password" id="password" placeholder="Make it secure">
+        <br>
+        <button name= "Submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
-
     <!-- MAIN PAGE CONTENT ENDS HERE -->
-    <div class="container fixed-bottom">
+
+    <div class="container-fluid fixed-bottom" id="header-footer">
         <footer class="page-footer font-small">
             <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="https://mdbootstrap.com/education/bootstrap/"> RecipieBuilder.com</a>
+            <a href="">TheZFighters</a>
             </div>
         </footer>
     </div>
