@@ -31,9 +31,9 @@ width: 600px;
 }
 
 #login-box{
-background-color: white; 
-margin: auto;
-margin-top: 20px;
+background-color: #d1ffc1; 
+margin-left: 50%;
+margin-top: 50%;
 width: 50%;
 padding: 10px;
 }
