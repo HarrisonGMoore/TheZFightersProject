@@ -1,6 +1,7 @@
 var req = null;
 var total_calories = 0;
-$("#ingredient").on("change keyup", function () {
+var ingredient_url = "";
+$("#ingredient").on("keyup", function () {
   var ingredient = $("#ingredient").val().trim();
   if (ingredient.length > 2) {
     let dropdown = $('#add-ingredient');
@@ -11,8 +12,13 @@ $("#ingredient").on("change keyup", function () {
     dropdown.append('<option selected="true" disabled>Choose Ingredient</option>');
     dropdown.prop('selectedIndex', 0);
 
-    var url = "https://apibeta.nutritionix.com/v2/search?q=" + ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37&search_type=grocery&offset=0&limit=10";
+    url_ingredient = ingredient;
+    if (ingredient.includes("%")) {
+      url_ingredient = ingredient.replace(/%/g, "%25");
+    }
 
+    var url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37&search_type=grocery&offset=0&limit=10";
+    console.log(url);
     req = $.getJSON(url, function (data) {
       console.log(data.exact);
       var unit = data.results[0].serving_uom;
@@ -33,11 +39,11 @@ $("#submit-ingredient").on("click", function (event) {
   event.preventDefault();
   console.log("hi");
   var ingredient = $("#ingredient").val().trim();
-  var url_ingredient = ingredient;
+  url_ingredient = ingredient;
   if (ingredient.includes("%")) {
     url_ingredient = ingredient.replace(/%/g, "%25");
   }
-  var ingredient_url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37";
+  var ingredient_url = "https://apibeta.nutritionix.com/v2/search?q=" + url_ingredient + "&appId=d4d504c5&appKey=69f0aa47633e46b412afc68d05a07e37&search_type=grocery&offset=0&limit=10";
 
   $.ajax({
     url: ingredient_url,
@@ -60,11 +66,15 @@ $("#submit-ingredient").on("click", function (event) {
 
     $("#ingredient").val("");
   });
+  url_ingredient = ingredient;
+  if (ingredient.includes("%")) {
+    url_ingredient = ingredient.replace(/%/g, "%25");
+  }
   if (ingredient_string === "") {
-    ingredient_string = ingredient;
+    ingredient_string = url_ingredient;
   }
   else {
-    ingredient_string = ingredient_string + "," + ingredient;
+    ingredient_string = ingredient_string + "," + url_ingredient;
   }
   var recipe_url = "https://api.edamam.com/search?q=" + ingredient_string + "&app_id=5452f6ef&app_key=28579f5271bcb880b21ca0931120f5d3";
   console.log(recipe_url);
@@ -105,19 +115,23 @@ function getTableData() {
 }
 
 function appendSimilar(response) {
-  $("#similar").html("");
+  $("#similar").empty();
   for (var i = 0; i < 5; i++) {
     var recipe = response.hits[i].recipe.label;
     var image_url = response.hits[i].recipe.image;
     var url = response.hits[i].recipe.url;
     console.log(url);
-    $("#similar").append(
-      "<div class='card' style='width: 18rem;'>" +
-      "<img class='card-img-top' src=" + image_url + " alt='Card image cap' style='height: 10rem'>" +
-      "<div class='card-body'>" +
-      "<h5 class='card-title'><a href=" + url + "><span>" + recipe + "</span></a></h5>" +
-      "</div>" +
-      "</div>"
-    );
+    $("#similar").append(`
+      <div class='card' style='width: 18rem;'>
+        <img class='card-img-top' src='${image_url}' alt='Card image cap' style='height: 10rem'>
+        <div class='card-body'>
+          <h5 class='card-title'>
+            <a href='${url}'>
+              <span>${recipe}</span>
+            </a>
+          </h5>
+        </div>
+      </div>
+    `);
   }
 }
