@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Create a New Recipe<span class="sr-only"></span></a>
+                <a class="nav-link" href="index.php">Create a New Recipe<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active">
-                <a class="nav-link" href="">My Recipes</a>
+                <a class="nav-link" href="my-recipes.php">My Recipes</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
