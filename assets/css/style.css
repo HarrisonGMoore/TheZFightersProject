@@ -48,7 +48,7 @@ body {
 }
 
 #similar {
-    height: 44em;
+    height: 40rem;
 }
 
 #build-recipe-card {
@@ -113,4 +113,9 @@ p, a span {
     font-weight: bold;
     border: none;
     overflow: auto;
+}
+
+#card-head {
+    padding-left: 1em;
+    padding-right: 1em;
 }

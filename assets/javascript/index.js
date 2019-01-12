@@ -126,7 +126,7 @@ function appendSimilar(response) {
       <div id='similar-card' class='card'>
         <img class='card-img-top' src='${image_url}' alt='Card image cap' style='height: 10rem'>
         <div id='similar-card-body'>
-          <h5 class='card-title' style="padding-left: 1em; padding-right: 1em;">
+          <h5 class='card-title' id='card-head'>
             <a href='${url}'>
               <span id="recipe-title">${recipe}</span>
             </a>
