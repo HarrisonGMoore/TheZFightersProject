@@ -114,3 +114,8 @@ p, a span {
     border: none;
     overflow: auto;
 }
+
+#card-head {
+    padding-left: 1em;
+    padding-right: 1em;
+}
