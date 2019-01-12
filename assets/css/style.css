@@ -30,7 +30,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40rem;
+    height: 30rem;
 }
 
 #create-user-form {
@@ -48,15 +48,15 @@ body {
 }
 
 #similar {
-    height: 40rem;
+    height: 28rem;
 }
 
 #build-recipe-card {
     font-weight: bold;
-    width: 60em;
+    width: 50em;
     overflow: auto;
     float: left;
-    margin-left:10em;
+    margin-left:5em;
     font-weight: bold;
     border: none;
 }
@@ -100,7 +100,7 @@ p, a span {
 }
 
 #your-recipes {
-    width: 60rem;
+    width: 50rem;
     min-height: 21rem;
     font-weight: bold;
     border: none;

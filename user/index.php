@@ -47,7 +47,7 @@
     <div class="container-fluid">
         <br>
         <div class="row">
-            <div class="col-md-7 mx-5" id="add-recipe-form">
+            <div class="col-md-6 mr-5" id="add-recipe-form">
                 <div class="card" id="build-recipe-card">
                     <div class="card-header" id="card-header">
                         Build Recipe
@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-1"></div>
             <div class="col-md-4 ml-5">
                 <div class="card" id="similar-recipes-card">
                     <div class="card-header" id="card-header">
