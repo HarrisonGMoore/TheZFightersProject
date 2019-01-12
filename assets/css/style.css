@@ -16,28 +16,6 @@ body {
     background-color: #d1ffc1;
 }
 
-/* #login-box {
-    background-color: white;
-    margin: auto;
-    margin-top: 20px;
-    width: 50%;
-    padding: 10px;
-}
-
-#my-recipes-main-box {
-    background-color: #d1ffc1;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 50%;
-    height: 80%;
-}
-
-#my-recipes-striped {
-    background-color: white;
-    margin: 5px;
-} */
-
 #card-header {
     background-color: #d1ffc1;
 }
@@ -84,7 +62,7 @@ body {
 }
 
 #similar-card {
-    width: 15rem;
+    width: 18rem;
     margin-bottom: 2rem;
     background-color: #e6e6e6;
 }
@@ -93,7 +71,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3rem;
+    min-height: 3rem;
+    overflow: auto;
 }
 
 #recipe-title {
@@ -106,7 +85,7 @@ p, a span {
 
 #similar-recipes-card {
     font-weight: bold;
-    width: 20em;
+    width: 23em;
     overflow: auto;
     float: right;
     border: none;
