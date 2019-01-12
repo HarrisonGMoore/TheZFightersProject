@@ -1,64 +1,61 @@
+<!DOCTYPE html>
 <html>
- <head>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <title>TailoredRecipes - Login</title>
- </head>
- <body>
-   <?php include 'connect.php'; ?>
-   <!-- form for login -->
-   <form class="form1" method="post" action="" id="form1">
-      <fieldset>
-        <ul>
-                <div class="container">
-                  <form class="form-horizontal" role="form" method="POST" action="/login">
-                      <div class="row">
-                          <div class="col-md-3"></div>
-                          <div class="col-md-6">
-                              <h2>Tailored Recipes Login</h2>
-                              <hr>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-3"></div>
-                          <div class="col-md-6">
-                              <div class="form-group has-danger">
-                                  <label class="sr-only" for="email">E-Mail Address</label>
-                                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                      <input type="text" name="email" class="form-control" id="email"
-                                             placeholder="you@example.com" required autofocus>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-3"></div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label class="sr-only" for="password">Password</label>
-                                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                      <input type="password" name="password" class="form-control" id="password"
-                                             placeholder="Password" required>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row" style="padding-top: 1rem">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                    <button name="Submit" type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button>
-                    <a class="btn btn-link" href="create-user.php">Create Account</a>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Recipe Builder: Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <?php include 'connect.php'; ?>
+    <div class="container-fluid" id="header-footer">
+        <nav class="navbar navbar-expand-lg">
+            <img class="mr-3" src="assets/css/recipe-builder-logo.png" alt="Recipe Builder" id="logo">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="nav-link" href="create-user.php">create account<span class="sr-only"></span></a>
+            </form>
+        </nav>
+    </div>
+
+    <!-- MAIN PAGE CONTENT GOES INBETWEEN HERE -->
+    <div id="page-content">
+        <div class="card" id="login-form">
+            <div class="card-header" id="card-header">
+                Login
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com"
+                            required autofocus>
                     </div>
-                  </div>
-                  </form>
-                </div>
-        </ul>
-        <br/>
-      </fieldset>
-    </form>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password"
+                            required>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" id="submit" name="submit" class="btn btn-secondary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <?php
-      if (isset($_POST['Submit'])) {
+      if (isset($_POST['submit'])) {
         // Check validity of login credentials using the supplied email and password
         $email = $conn->real_escape_string($_POST['email']);
         $password = $conn->real_escape_string($_POST['password']);
@@ -78,23 +75,36 @@
           $perm->execute() or die($perm->error);
           $fields = $perm->get_result();
           $user_id = -1;
-
           while ($row = $fields->fetch_assoc()) {
             $user_id = $row["user_id"];
           }
-
           $_SESSION["USER_ID"] = $user_id;
-
           //Redirect to the correct page
           header('Location: /user/index.php');
-
         }
         else {
-          ?><div class="row" style="padding-top: 1rem"><div class="col-md-6"></div><div class="col-md-6"><?php print 'Invalid email/password. Please try again.';?></div></div><?php
+          ?>
+    <div class="row" style="padding-top: 1rem">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <?php print 'Invalid email/password. Please try again.';?>
+        </div>
+    </div>
+    <?php
         }
     }
-
-
     ?>
- </body>
+    <!-- MAIN PAGE CONTENT ENDS HERE -->
+
+    <div class="container-fluid fixed-bottom" id="header-footer">
+        <footer class="page-footer font-small">
+            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">TheZFighters</a>
+            </div>
+        </footer>
+    </div>
+    </div>
+
+</body>
+
 </html>

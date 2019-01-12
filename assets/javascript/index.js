@@ -65,6 +65,7 @@ $("#submit-ingredient").on("click", function (event) {
     }
 
     $("#ingredient").val("");
+    $("#amount").val("");
   });
   url_ingredient = ingredient;
   if (ingredient.includes("%")) {
@@ -122,12 +123,12 @@ function appendSimilar(response) {
     var url = response.hits[i].recipe.url;
     console.log(url);
     $("#similar").append(`
-      <div class='card' style='width: 18rem;'>
+      <div id='similar-card' class='card'>
         <img class='card-img-top' src='${image_url}' alt='Card image cap' style='height: 10rem'>
-        <div class='card-body'>
+        <div id='similar-card-body'>
           <h5 class='card-title'>
             <a href='${url}'>
-              <span>${recipe}</span>
+              <span id="recipe-title">${recipe}</span>
             </a>
           </h5>
         </div>
