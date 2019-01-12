@@ -1,46 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Recipe Builder: Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
     <script src="main.js"></script>
-    <?php include('validate.php'); ?>
-    <?php include('..connect.php'); ?>
 </head>
+
 <body>
-<?php include 'connect.php'; ?>
-<div class="container-fluid" id="header-footer">
+    <?php include 'connect.php'; ?>
+    <div class="container-fluid" id="header-footer">
         <nav class="navbar navbar-expand-lg">
             <img class="mr-3" src="assets/css/recipe-builder-logo.png" alt="Recipe Builder" id="logo">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a class="nav-link" href="create-user.php">Not a member? Sing up here:<span class="sr-only"></span></a>
+                <a class="nav-link" href="create-user.php">create account<span class="sr-only"></span></a>
             </form>
-            </div>
         </nav>
     </div>
 
     <!-- MAIN PAGE CONTENT GOES INBETWEEN HERE -->
-    <div>
-        <form method="post" id="login-box">
-        Email:
-        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="jsmith@johnsmith.com">
-        Password:
-        <input type="password" class="form-control" name="password" id="password"  placeholder="password">
-        <br>
-        <button name="Submit" type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <div id="page-content">
+        <div class="card" id="login-form">
+            <div class="card-header" id="card-header">
+                Login
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com"
+                            required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password"
+                            required>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" id="submit" name="submit" class="btn btn-secondary">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
     <?php
-      if (isset($_POST['Submit'])) {
+      if (isset($_POST['submit'])) {
         // Check validity of login credentials using the supplied email and password
         $email = $conn->real_escape_string($_POST['email']);
         $password = $conn->real_escape_string($_POST['password']);
@@ -68,7 +83,14 @@
           header('Location: /user/index.php');
         }
         else {
-          ?><div class="row" style="padding-top: 1rem"><div class="col-md-6"></div><div class="col-md-6"><?php print 'Invalid email/password. Please try again.';?></div></div><?php
+          ?>
+    <div class="row" style="padding-top: 1rem">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <?php print 'Invalid email/password. Please try again.';?>
+        </div>
+    </div>
+    <?php
         }
     }
     ?>
@@ -77,10 +99,12 @@
     <div class="container-fluid fixed-bottom" id="header-footer">
         <footer class="page-footer font-small">
             <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">TheZFighters</a>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">TheZFighters</a>
             </div>
         </footer>
     </div>
-</div>
+    </div>
+
 </body>
+
 </html>

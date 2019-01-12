@@ -1,62 +1,137 @@
 html {
-height: 100%;
+    height: 100%;
 }
 
 body {
-height: 100% !important;
-background-image: url(better-cutting-board.jpg);
-}
-
-#main-page {
-margin-top: 5%;
-width: 80%;
-height: 100%;
+    height: 100% !important;
+    background-image: url(better-cutting-board.jpg);
 }
 
 #logo {
-height: 50px;
-background-color: #d1ffc1;
+    height: 50px;
+    background-color: #d1ffc1;
 }
 
 #header-footer {
-background-color: #d1ffc1;
+    background-color: #d1ffc1;
 }
 
-#similar-recipe-column {
-height: 100%;
+/* #login-box {
+    background-color: white;
+    margin: auto;
+    margin-top: 20px;
+    width: 50%;
+    padding: 10px;
 }
 
-#ingredient-form {
-width: 600px;
+#my-recipes-main-box {
+    background-color: #d1ffc1;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    height: 80%;
 }
 
-#login-box{
-background-color: white; 
-margin: auto;
-margin-top: 20px;
-width: 50%;
-padding: 10px;
+#my-recipes-striped {
+    background-color: white;
+    margin: 5px;
+} */
+
+#card-header {
+    background-color: #d1ffc1;
 }
 
-#my-recipes-main-box{
-background-color: #d1ffc1; 
-margin: auto;
-margin-top: 20px;
-margin-bottom: 20px;
-width: 50%;
-height: 80%;
+#login-form {
+    width: 30rem;
+    height: 21rem;
+    font-weight: bold;
 }
 
-#my-recipes-striped{
-background-color: white;
-margin: 5px;
+#page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40rem;
 }
 
-#card-header{
-background-color: #d1ffc1; 
-margin: auto;
-margin-top: 20px;
-margin-bottom: 20px;
-width: 50%;
-height: 80%;
+#create-user-form {
+    width: 40rem;
+    height: 32rem;
+    font-weight: bold;
+}
+
+.label {
+    font-weight: bold;
+}
+
+#add-recipe-form {
+    height: 50rem;
+}
+
+#similar {
+    height: 44em;
+}
+
+#build-recipe-card {
+    font-weight: bold;
+    width: 60em;
+    overflow: auto;
+    float: left;
+    margin-left:10em;
+    font-weight: bold;
+    border: none;
+}
+
+#similar-card {
+    width: 15rem;
+    margin-bottom: 2rem;
+    background-color: #e6e6e6;
+}
+
+#similar-card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+#recipe-title {
+    font-size: 18px;
+}
+
+p, a span {
+    color: black;
+}
+
+#similar-recipes-card {
+    font-weight: bold;
+    width: 20em;
+    overflow: auto;
+    float: right;
+    border: none;
+    margin-right: 10em;
+}
+
+#similar-card-header {
+    background-color: #d1ffc1;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+#your-recipes {
+    width: 60rem;
+    min-height: 21rem;
+    font-weight: bold;
+    border: none;
+    overflow: auto;
+}
+
+#view-recipes {
+    width: 60rem;
+    min-height: 21rem;
+    font-weight: bold;
+    border: none;
+    overflow: auto;
 }
